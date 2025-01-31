@@ -11,10 +11,10 @@ namespace SciCalc.ViewModels
     [INotifyPropertyChanged]
     internal partial class CalculatorPageViewModel
     {
-        [ObservableObject]
+        [ObservableProperty]
         private string inputText = string.Empty;
 
-        [ObservableObject]
+        [ObservableProperty]
         private string calculatedResult = "0";
 
         private bool isSciOpWaiting = false;
@@ -51,6 +51,7 @@ namespace SciCalc.ViewModels
             }
             catch (Exception ex)
             {
+
                 throw;
             }
         }
@@ -86,9 +87,9 @@ namespace SciCalc.ViewModels
         }
 
         [RelayCommand]
-        private void Backscape()
+        private void Backspace()
         {
-            if (InputText.Length > 0)
+            if (InputText.Length >0)
             {
                 InputText = InputText.Substring(0, InputText.Length - 1);
             }
@@ -123,7 +124,6 @@ namespace SciCalc.ViewModels
         }
 
         [RelayCommand]
-
         private void ScientificOperator(string op)
         {
             InputText += $"{op}(";
