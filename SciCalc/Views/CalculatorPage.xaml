@@ -5,19 +5,24 @@
              Title="CalculatorPage">
 
     <Grid
-        RowDefinitions="*,68,48,44,44,48,64,64,64,64"
-        ColumnDefinitions="*,*,*,*,*">
+        RowDefinitions="*,*"
+        ColumnDefinitions="*">
 
-        <!--Color Answer Row-->
-        <BoxView
+        <Grid
+        RowDefinitions="*,68,48,44,44,48"
+        ColumnDefinitions="*,*,*,*,*"
+        Grid.Row="0">
+
+            <!--Color Answer Row-->
+            <BoxView
             VerticalOptions="Fill"
             HorizontalOptions="Fill"
             BackgroundColor="#262D37"
             Grid.Row="1"
             Grid.ColumnSpan="5"/>
 
-        <!--Input Area-->
-        <Frame
+            <!--Input Area-->
+            <Frame
             HasShadow="False"
             Padding="6,0,4,0"
             Margin="12"
@@ -28,33 +33,33 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="5">
-            <Label
+                <Label
                 LineHeight="1.5"
                 VerticalTextAlignment="Center"
                 VerticalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding InputText}" Style="{StaticResource InputBoxLabelStyle}"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-        </Frame>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding InputText}" Style="{StaticResource InputBoxLabelStyle}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Frame>
 
-        <!--Answer Row-->
-        <Grid
+            <!--Answer Row-->
+            <Grid
             ColumnDefinitions="Auto,*"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="5">
 
-            <Label
+                <Label
                 Text="="
                 VerticalOptions="Center"
                 VerticalTextAlignment="Center"
                 Style="{StaticResource EqualsLabelStyle}"
                 Margin="16,0"/>
 
-            <Label
+                <Label
                 Text="{Binding CalculatedResult, Mode=OneWay}"
                 VerticalOptions="Center"
                 VerticalTextAlignment="Center"
@@ -62,12 +67,12 @@
                 Grid.Column="1"
                 Style="{StaticResource ResultLabelStyle}"
                 Margin="16,0"/>
-        </Grid>
+            </Grid>
 
-        <!--Scientific Operators-->
+            <!--Scientific Operators-->
 
-        <!--Row 1-->
-        <Button
+            <!--Row 1-->
+            <Button
             Grid.Row="2"
             Grid.Column="0"
             ZIndex="1"
@@ -75,7 +80,7 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="MEAN"/>
 
-        <Button
+            <Button
             Grid.Row="2"
             Grid.Column="1"
             ZIndex="1"
@@ -83,7 +88,7 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="MOD"/>
 
-        <Button
+            <Button
             Grid.Row="2"
             Grid.Column="2"
             ZIndex="1"
@@ -91,7 +96,7 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="STD"/>
 
-        <Button
+            <Button
             Grid.Row="2"
             Grid.Column="3"
             ZIndex="1"
@@ -99,7 +104,7 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="VAR"/>
 
-        <Button
+            <Button
             Grid.Row="2"
             Grid.Column="4"
             ZIndex="1"
@@ -107,8 +112,8 @@
             Style="{StaticResource ScientificOperatorButtonStyle}"
             Text="FACT"/>
 
-        <!--Row 2-->
-        <Button
+            <!--Row 2-->
+            <Button
             Grid.Row="3"
             Grid.Column="0"
             ZIndex="1"
@@ -118,7 +123,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="SIN"/>
 
-        <Button
+            <Button
             Grid.Row="3"
             Grid.Column="1"
             ZIndex="1"
@@ -128,7 +133,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="COS"/>
 
-        <Button
+            <Button
             Grid.Row="3"
             Grid.Column="2"
             ZIndex="1"
@@ -138,7 +143,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="TAN"/>
 
-        <Button
+            <Button
             Grid.Row="3"
             Grid.Column="3"
             ZIndex="1"
@@ -148,7 +153,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="LOG"/>
 
-        <Button
+            <Button
             Grid.Row="3"
             Grid.Column="4"
             ZIndex="1"
@@ -158,8 +163,8 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="EXP"/>
 
-        <!--Row 3-->
-        <Button
+            <!--Row 3-->
+            <Button
             Grid.Row="4"
             Grid.Column="0"
             ZIndex="1"
@@ -169,7 +174,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="ASIN"/>
 
-        <Button
+            <Button
             Grid.Row="4"
             Grid.Column="1"
             ZIndex="1"
@@ -179,7 +184,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="ACOS"/>
 
-        <Button
+            <Button
             Grid.Row="4"
             Grid.Column="2"
             ZIndex="1"
@@ -189,7 +194,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="ATAN"/>
 
-        <Button
+            <Button
             Grid.Row="4"
             Grid.Column="3"
             ZIndex="1"
@@ -199,7 +204,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="LOG10"/>
 
-        <Button
+            <Button
             Grid.Row="4"
             Grid.Column="4"
             ZIndex="1"
@@ -209,8 +214,8 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="POW"/>
 
-        <!--Row 4-->
-        <Button
+            <!--Row 4-->
+            <Button
             Grid.Row="5"
             Grid.Column="0"
             ZIndex="1"
@@ -220,7 +225,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="SQRT"/>
 
-        <Button
+            <Button
             Grid.Row="5"
             Grid.Column="1"
             ZIndex="1"
@@ -230,7 +235,7 @@
             Command="{Binding ScientificOperatorCommand}"
             CommandParameter="ABS"/>
 
-        <Button
+            <Button
             Grid.Row="5"
             Grid.Column="2"
             ZIndex="1"
@@ -240,7 +245,7 @@
             Command="{Binding RegionOperatorCommand}"
             CommandParameter=","/>
 
-        <Button
+            <Button
             Grid.Row="5"
             Grid.Column="3"
             ZIndex="1"
@@ -250,7 +255,7 @@
             Command="{Binding RegionOperatorCommand}"
             CommandParameter="("/>
 
-        <Button
+            <Button
             Grid.Row="5"
             Grid.Column="4"
             ZIndex="1"
@@ -259,24 +264,25 @@
             Text=")"
             Command="{Binding RegionOperatorCommand}"
             CommandParameter=")"/>
-    </Grid>
-    <!--Row 5-->
-    <Grid
-        RowDefinitions="*,68,48,44,44,48,64,64,64,64"
+        </Grid>
+        <!--Row 5-->
+        <Grid
+        RowDefinitions="64,64,64,64"
         ColumnDefinitions="*,*,*,*,*"
+        Grid.Row="1"
         BackgroundColor="#2dd255">
 
-        <Button
-        Grid.Row="6"
-        Grid.Column="0"
-        ZIndex="1"
-        Style="{StaticResource NumberButtonStyle}"
-        Text="7"
-        Command="{Binding NumberInputCommand}"
-        CommandParameter="7"/>
+            <Button
+            Grid.Row="0"
+            Grid.Column="0"
+            ZIndex="1"
+            Style="{StaticResource NumberButtonStyle}"
+            Text="7"
+            Command="{Binding NumberInputCommand}"
+            CommandParameter="7"/>
 
-        <Button
-            Grid.Row="6"
+            <Button
+            Grid.Row="0"
             Grid.Column="1"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -284,8 +290,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="8"/>
 
-        <Button
-            Grid.Row="6"
+            <Button
+            Grid.Row="0"
             Grid.Column="2"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -293,8 +299,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="9"/>
 
-        <Button
-            Grid.Row="6"
+            <Button
+            Grid.Row="0"
             Grid.Column="3"
             Grid.ColumnSpan="2"
             ZIndex="1"
@@ -303,9 +309,9 @@
             Command="{Binding ResetCommand}"
             CommandParameter="AC"/>
 
-        <!--Row 6-->
-        <Button
-            Grid.Row="7"
+            <!--Row 6-->
+            <Button
+            Grid.Row="1"
             Grid.Column="0"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -313,8 +319,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="4"/>
 
-        <Button
-            Grid.Row="7"
+            <Button
+            Grid.Row="1"
             Grid.Column="1"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -322,8 +328,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="5"/>
 
-        <Button
-            Grid.Row="7"
+            <Button
+            Grid.Row="1"
             Grid.Column="2"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -331,8 +337,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="6"/>
 
-        <Button
-            Grid.Row="7"
+            <Button
+            Grid.Row="1"
             Grid.Column="3"
             ZIndex="1"
             Style="{StaticResource OperatorButtonStyle}"
@@ -340,8 +346,8 @@
             Command="{Binding MathOperatorCommand}"
             CommandParameter="×"/>
 
-        <Button
-            Grid.Row="7"
+            <Button
+            Grid.Row="1"
             Grid.Column="4"
             ZIndex="1"
             Style="{StaticResource OperatorButtonStyle}"
@@ -349,9 +355,9 @@
             Command="{Binding MathOperatorCommand}"
             CommandParameter="÷"/>
 
-        <!--Row 7-->
-        <Button
-            Grid.Row="8"
+            <!--Row 7-->
+            <Button
+            Grid.Row="2"
             Grid.Column="0"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -359,8 +365,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="1"/>
 
-        <Button
-            Grid.Row="8"
+            <Button
+            Grid.Row="2"
             Grid.Column="1"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -368,8 +374,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="2"/>
 
-        <Button
-            Grid.Row="8"
+            <Button
+            Grid.Row="2"
             Grid.Column="2"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -377,8 +383,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="3"/>
 
-        <Button
-            Grid.Row="8"
+            <Button
+            Grid.Row="2"
             Grid.Column="3"
             ZIndex="1"
             Style="{StaticResource OperatorButtonStyle}"
@@ -386,8 +392,8 @@
             Command="{Binding MathOperatorCommand}"
             CommandParameter="+"/>
 
-        <Button
-            Grid.Row="8"
+            <Button
+            Grid.Row="2"
             Grid.Column="4"
             ZIndex="1"
             Style="{StaticResource OperatorButtonStyle}"
@@ -395,9 +401,9 @@
             Command="{Binding MathOperatorCommand}"
             CommandParameter="-"/>
 
-        <!--Row 8-->
-        <Button
-            Grid.Row="9"
+            <!--Row 8-->
+            <Button
+            Grid.Row="3"
             Grid.Column="0"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -405,8 +411,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="0"/>
 
-        <Button
-            Grid.Row="9"
+            <Button
+            Grid.Row="3"
             Grid.Column="1"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -414,8 +420,8 @@
             Command="{Binding NumberInputCommand}"
             CommandParameter="."/>
 
-        <Button
-            Grid.Row="9"
+            <Button
+            Grid.Row="3"
             Grid.Column="2"
             ZIndex="1"
             Style="{StaticResource NumberButtonStyle}"
@@ -423,8 +429,8 @@
             Command="{Binding BackspaceCommand }"
             CommandParameter="⌫"/>
 
-        <Button
-            Grid.Row="9"
+            <Button
+            Grid.Row="3"
             Grid.Column="3"
             Grid.ColumnSpan="2"
             ZIndex="1"
@@ -432,6 +438,7 @@
             Text="="
             Command="{Binding CalculateCommand }"
             CommandParameter="="/>
-        
+
+        </Grid>
     </Grid>
 </ContentPage>
