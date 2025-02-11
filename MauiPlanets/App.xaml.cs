@@ -4,6 +4,8 @@ using Microsoft.UI.Windowing;
 using Windows.Graphics;
 #endif
 
+using MauiPlanets.Views;
+
 namespace MauiPlanets
 {
     public partial class App : Application
@@ -27,7 +29,7 @@ namespace MauiPlanets
                 #endif
             });
 
-            MainPage = new AppShell();
+            MainPage = new StartPage();
         }
     }
 }
