@@ -57,6 +57,11 @@
         <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
     </Style>
 
+    <Style TargetType="Label" x:Key="MenuLabelStyle" BasedOn="{StaticResource BaseRegularLabelStyle}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#CCCCCC" />
+    </Style>
+
     <Style TargetType="Label" x:Key="PageSubHeaderStyle" BasedOn="{StaticResource BaseMediumLabelStyle}">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
