@@ -3,10 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiPlanets.Views.PlanetsDetailsPage"
              Title="PlanetsDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#666" Offset="0.0" />
+            <GradientStop Color="#000" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <Grid
+        Margin="24,52,24,0"
+        ColumnDefinitions="*,*"
+        RowDefinitions="Auto,*">
+
+        <ImageButton 
+            WidthRequest="24"
+            HeightRequest="24"
+            Source="imgback.png"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            Clicked="BackButton_Clicked"/>
+    </Grid>
+    
 </ContentPage>
