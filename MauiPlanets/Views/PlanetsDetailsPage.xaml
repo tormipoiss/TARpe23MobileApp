@@ -25,6 +25,27 @@
             HorizontalOptions="Start"
             VerticalOptions="Center"
             Clicked="BackButton_Clicked"/>
+
+        <ImageButton 
+            WidthRequest="24"
+            HeightRequest="24"
+            Source="imgmenu.png"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalOptions="End"
+            VerticalOptions="Center" />
+        
+        <!--Main content scrollview-->
+        <ScrollView
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalScrollBarVisibility="Never"
+            VerticalScrollBarVisibility="Never"
+            Margin="0,16,0,0">
+            
+        </ScrollView>
+
     </Grid>
     
 </ContentPage>
