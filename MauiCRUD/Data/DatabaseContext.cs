@@ -5,9 +5,11 @@ namespace Data
 {
     public class DatabaseContext
     {
-        private const string DbName = "CRUDdb3";
+        private const string DbName = "CRUDdb4";
         private static string DbPath => Path.Combine(".", DbName);
+
         private SQLiteAsyncConnection _connection;
+
         private SQLiteAsyncConnection Database =>
             (_connection ??= new SQLiteAsyncConnection(DbPath,
                 SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.SharedCache));
@@ -29,7 +31,7 @@ namespace Data
             await Database.CreateTableAsync<TTable>();
         }
 
-        public async Task<TResult> Execute<TTable, TResult>(Func<Task<TResult>> action) where TTable : class, new()
+        private async Task<TResult> Execute<TTable, TResult>(Func<Task<TResult>> action) where TTable : class, new()
         {
             await CreateTableIfNotExists<TTable>();
             return await action();
@@ -65,7 +67,7 @@ namespace Data
 
         public async ValueTask DisposeAsync() => await _connection.CloseAsync();
 
-        public async Task<IEnumerable<TTable>> GetFilteredAsync<TTable>(Expression<Func<TTable, bool>> predicate) where TTable: class, new()
+        public async Task<IEnumerable<TTable>> GetFilteredAsync<TTable>(Expression<Func<TTable, bool>> predicate) where TTable : class, new()
         {
             var table = await GetTableAsync<TTable>();
             return await table.Where(predicate).ToListAsync();
