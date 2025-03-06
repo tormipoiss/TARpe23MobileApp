@@ -1,4 +1,4 @@
-using ViewModels;
+using FruitVegBasket.ViewModels;
 
 namespace Pages;
 
@@ -11,7 +11,7 @@ public partial class HomePage : ContentPage
         InitializeComponent();
         _viewModel = viewModel;
         BindingContext = _viewModel;
-     }
+     }  
 
     protected override async void OnAppearing()
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using Services;
-using ViewModels;
+using FruitVegBasket.Services;
+using FruitVegBasket.ViewModels;
 using Pages;
 
 namespace FruitVegBasketMaui

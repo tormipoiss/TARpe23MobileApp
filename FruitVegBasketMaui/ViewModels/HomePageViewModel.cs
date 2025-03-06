@@ -1,10 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Models;
+using FruitVegBasket.Services;
+using System.Collections.ObjectModel;
 
-namespace ViewModels
+namespace FruitVegBasket.ViewModels
 {
     public partial class HomePageViewModel : ObservableObject
     {
