@@ -1,4 +1,4 @@
-﻿using FruitVegBasketMaui.Enumerations;
+﻿using FruitVegBasketMaui.Shared.Enumerations;
 
 namespace Models
 {
