@@ -134,14 +134,19 @@
                         <Border StrokeShape="RoundRectangle 5"
                             StrokeThickness="0">
                             <Grid>
-                                <Image Source="{Binding Image}"
-                                   Aspect="AspectFill"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="Center"
-                                   HeightRequest="175"
-                                   WidthRequest="150"
-                                   Opacity="0.9"/>
-                                <Border StrokeShape="RoundRectangle 8"
+                                <Image
+                                    Aspect="AspectFill"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    HeightRequest="175"
+                                    WidthRequest="150"
+                                    Opacity="0.9">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Image}"
+                                                         CachingEnabled="True"/>
+                                    </Image.Source>
+                                </Image>
+                            <Border StrokeShape="RoundRectangle 8"
                                     StrokeThickness="0"
                                     BackgroundColor="White"
                                     VerticalOptions="End"
