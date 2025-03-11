@@ -1,5 +1,6 @@
 using FruitVegBasketMaui.Api.Constants;
 using FruitVegBasketMaui.Api.Data;
+using FruitVegBasketMaui.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,8 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(options =>
-             options.UseSqlServer(
-                 builder.Configuration.GetConnectionString(DatabaseConstants.GroceryConnectionStringKey)));
+            options.UseSqlServer(
+                builder.Configuration.GetConnectionString(DatabaseConstants.GroceryConnectionStringKey)));
 
 var app = builder.Build();
 
@@ -25,17 +26,33 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 var mastersGroup = app.MapGroup("/masters")
-                     .AllowAnonymous();
+                    .AllowAnonymous();
 
 mastersGroup.MapGet("/categories", async (DataContext context) =>
-    await context.Categories
+    TypedResults.Ok(await context.Categories
     .AsNoTracking()
     .ToArrayAsync()
+    )
 );
 mastersGroup.MapGet("/offers", async (DataContext context) =>
-    await context.Offers
+    TypedResults.Ok(await context.Offers
     .AsNoTracking()
     .ToArrayAsync()
+    )
 );
+
+app.MapGet("/popular-products", async (DataContext context, int? count) =>
+{
+    if (!count.HasValue || count <= 0)
+        count = 6;
+
+    var randomProducts = await context.Products
+                            .AsNoTracking()
+                            .OrderBy(p => Guid.NewGuid())
+                            .Take(count.Value)
+                            .Select(Product.DtoSelector)
+                            .ToArrayAsync();
+    return TypedResults.Ok(randomProducts);
+});
 
 app.Run("https://localhost:12345");

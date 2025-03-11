@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FruitVegBasketMaui.Shared.Dtos;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq.Expressions;
 
 namespace FruitVegBasketMaui.Api.Data.Entities
 {
@@ -99,5 +101,8 @@ namespace FruitVegBasketMaui.Api.Data.Entities
 
             return products;
         }
+
+        internal static readonly Expression<Func<Product, ProductDto>> DtoSelector =
+             p => new ProductDto(p.Id, p.Name, p.Image, p.Price, p.Unit, p.CategoryId);
     }
 }

@@ -46,6 +46,7 @@ namespace FruitVegBasketMaui
                 configBuilder.PrimaryHandler = platformHttpMessageHandler.GetHttpMessageHandler();
             });
             builder.Services.AddSingleton<CategoryService>();
+            builder.Services.AddSingleton<ProductsService>();
             builder.Services.AddTransient<OffersService>();
             builder.Services.AddSingleton<HomePageViewModel>();
             builder.Services.AddSingleton<HomePage>();
