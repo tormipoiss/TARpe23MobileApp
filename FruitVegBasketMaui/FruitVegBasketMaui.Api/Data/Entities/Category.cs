@@ -32,7 +32,7 @@ namespace FruitVegBasketMaui.Api.Data.Entities
         public Category()
         {
         }
-        public static IEnumerable<Category> GetInitialCategories()
+        public static IEnumerable<Category> GetInitialData()
         {
             var categories = new List<Category>();
 
