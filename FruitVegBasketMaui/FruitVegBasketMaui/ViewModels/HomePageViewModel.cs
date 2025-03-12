@@ -4,6 +4,7 @@ using FruitVegBasket.Services;
 using System.Collections.ObjectModel;
 using Services;
 using FruitVegBasketMaui.Shared.Dtos;
+using CommunityToolkit.Mvvm.Input;
 
 namespace FruitVegBasket.ViewModels
 {
@@ -49,6 +50,20 @@ namespace FruitVegBasket.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        [RelayCommand]
+        private void AddToCart(int productId) => UpdateCart(productId, 1);
+        [RelayCommand]
+        private void RemoveFromCart(int productId) => UpdateCart(productId, -1);
+
+        private void UpdateCart(int productId, int count)
+        {
+            var product = PopularProducts.FirstOrDefault(p => p.Id == productId);
+            if (product is not null)
+            {
+                product.CartQuantity += count;
             }
         }
     }
