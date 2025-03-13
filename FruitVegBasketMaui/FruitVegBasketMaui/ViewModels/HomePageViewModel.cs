@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using Services;
 using FruitVegBasketMaui.Shared.Dtos;
 using CommunityToolkit.Mvvm.Input;
-using ViewModels;
 
 namespace FruitVegBasket.ViewModels
 {
