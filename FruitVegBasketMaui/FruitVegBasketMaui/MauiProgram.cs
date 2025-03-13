@@ -5,6 +5,7 @@ using FruitVegBasket.ViewModels;
 using Pages;
 using Interfaces;
 using Services;
+using ViewModels;
 
 namespace FruitVegBasketMaui
 {
@@ -50,6 +51,7 @@ namespace FruitVegBasketMaui
             builder.Services.AddTransient<OffersService>();
             builder.Services.AddSingleton<HomePageViewModel>();
             builder.Services.AddSingleton<HomePage>();
+            builder.Services.AddSingleton<CartViewModel>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
