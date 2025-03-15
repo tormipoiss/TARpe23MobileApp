@@ -8,6 +8,10 @@ namespace FruitVegBasket.ViewModels
 {
     public partial class CartViewModel : ObservableObject
     {
+        public event EventHandler<int> CartCountUpdated;
+        public event EventHandler<CartItem> CartItemUpdated;
+        public event EventHandler<int> CartItemRemoved;
+
         public ObservableCollection<CartItem> CartItems { get; set; } = new();
 
         [ObservableProperty]
@@ -27,6 +31,7 @@ namespace FruitVegBasket.ViewModels
             {
                 item.Quantity++;
                 RecalculateTotalAmount();
+                CartItemUpdated?.Invoke(this, item);
             }
         }
 
@@ -37,6 +42,7 @@ namespace FruitVegBasket.ViewModels
             if (item is not null)
             {
                 item.Quantity++;
+                CartItemUpdated?.Invoke(this, item);
             }
             else
             {
@@ -50,8 +56,10 @@ namespace FruitVegBasket.ViewModels
                 };
                 CartItems.Add(item);
                 Count = CartItems.Count;
+                CartCountUpdated?.Invoke(this, Count);
             }
             RecalculateTotalAmount();
+            CartItemUpdated?.Invoke(this, item);
         }
 
         [RelayCommand]
@@ -64,10 +72,13 @@ namespace FruitVegBasket.ViewModels
                 {
                     CartItems.Remove(item);
                     Count = CartItems.Count;
+                    CartItemRemoved?.Invoke(this, productId);
+                    CartCountUpdated?.Invoke(this, Count);
                 }
                 else
                 {
                     item.Quantity--;
+                    CartItemUpdated?.Invoke(this, item);
                 }
             }
             RecalculateTotalAmount();

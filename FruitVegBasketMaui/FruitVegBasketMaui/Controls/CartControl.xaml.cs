@@ -17,10 +17,15 @@ public partial class CartControl : ContentView
         set => SetValue(CountProperty, value);
     }
 
+    private bool _alreadyAllocated;
     protected override void OnSizeAllocated(double width, double height)
     {
         base.OnSizeAllocated(width, height);
-        container.Scale = 0;
+        if (!_alreadyAllocated)
+        {
+            container.Scale = 0;
+            _alreadyAllocated = true;
+        }
     }
 
     private async Task AnimateContainer(AnimationType animationType)

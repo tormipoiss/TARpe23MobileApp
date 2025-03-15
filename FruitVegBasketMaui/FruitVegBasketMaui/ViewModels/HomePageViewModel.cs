@@ -8,7 +8,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace FruitVegBasket.ViewModels
 {
-    public partial class HomePageViewModel : ObservableObject
+    public partial class HomePageViewModel : ObservableObject, IDisposable
     {
         private readonly CategoryService _categoryService;
         private readonly OffersService _offersService;
@@ -22,7 +22,29 @@ namespace FruitVegBasket.ViewModels
             _offersService = offersService;
             _productsService = productsService;
             _cartViewModel = cartViewModel;
+
+            _cartViewModel.CartCountUpdated += CartViewModel_CartCountUpdated;
+            _cartViewModel.CartItemUpdated += CartViewModel_CartItemUpdated;
+            _cartViewModel.CartItemRemoved += CartViewModel_CartItemRemoved;
         }
+
+        private void CartViewModel_CartItemRemoved(object sender, int productId) =>
+            ModifyProductQuantity(productId, 0);
+
+        private void CartViewModel_CartItemUpdated(object sender, CartItem e) =>
+            ModifyProductQuantity(e.ProductId, e.Quantity);
+
+        private void ModifyProductQuantity(int productId, int quantity)
+        {
+            var product = PopularProducts.FirstOrDefault(p => p.Id == productId);
+            if (product is not null)
+            {
+                product.CartQuantity = quantity;
+            }
+        }
+
+        private void CartViewModel_CartCountUpdated(object sender, int cartCount) => CartCount = cartCount;
+
         public ObservableCollection<Category> Categories { get; set; } = new();
         public ObservableCollection<Offer> Offers { get; set; } = new();
         public ObservableCollection<ProductDto> PopularProducts { get; set; } = new();
@@ -32,9 +54,12 @@ namespace FruitVegBasket.ViewModels
 
         [ObservableProperty]
         private int _cartCount;
+        private bool _isInitialized = false;
 
         public async Task InitializeAsync()
         {
+            if (_isInitialized)
+                return;
             try
             {
                 var offersTask = _offersService.GetActiveOffersAsync();
@@ -51,6 +76,7 @@ namespace FruitVegBasket.ViewModels
                 {
                     PopularProducts.Add(product);
                 }
+                _isInitialized = true;
             }
             finally
             {
@@ -82,6 +108,13 @@ namespace FruitVegBasket.ViewModels
                 }
                 CartCount = _cartViewModel.Count;
             }
+        }
+
+        public void Dispose()
+        {
+            _cartViewModel.CartCountUpdated -= CartViewModel_CartCountUpdated;
+            _cartViewModel.CartItemUpdated -= CartViewModel_CartItemUpdated;
+            _cartViewModel.CartItemRemoved -= CartViewModel_CartItemRemoved;
         }
     }
 }
