@@ -137,6 +137,10 @@
                         <DataTemplate x:DataType="models:Category">
                             <Border StrokeShape="RoundRectangle 5"
                             StrokeThickness="0">
+                                    <Border.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type vm:HomePageViewModel}}, Path=GoToCategoryProductsPageCommand}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </Border.GestureRecognizers>
                                 <Grid>
                                     <Image 
                                    Aspect="AspectFill"

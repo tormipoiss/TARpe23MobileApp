@@ -5,7 +5,6 @@ using FruitVegBasket.ViewModels;
 using Pages;
 using Interfaces;
 using Services;
-using ViewModels;
 
 namespace FruitVegBasketMaui
 {

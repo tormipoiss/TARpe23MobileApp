@@ -1,4 +1,5 @@
 using FruitVegBasket.Services;
+using FruitVegBasket.ViewModels;
 using Models;
 using System.Collections.ObjectModel;
 
@@ -30,7 +31,11 @@ public partial class CategoriesPage : ContentPage
 	{
 		if (e.CurrentSelection?[0] is Category category)
 		{
-			await Shell.Current.GoToAsync(nameof(CategoryProductsPage));
-		}
+			var parameter = new Dictionary<string, object>
+			{
+				[nameof(CategoryProductsViewModel.SelectedCategory)] = category
+			};
+            await Shell.Current.GoToAsync(nameof(CategoryProductsPage), animate: true, parameter);
+        }
 	}
 }

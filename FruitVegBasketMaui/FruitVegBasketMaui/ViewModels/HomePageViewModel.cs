@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Services;
 using FruitVegBasketMaui.Shared.Dtos;
 using CommunityToolkit.Mvvm.Input;
+using Pages;
 
 namespace FruitVegBasket.ViewModels
 {
@@ -88,6 +89,16 @@ namespace FruitVegBasket.ViewModels
         private void AddToCart(int productId) => UpdateCart(productId, 1);
         [RelayCommand]
         private void RemoveFromCart(int productId) => UpdateCart(productId, -1);
+
+        [RelayCommand]
+        private async Task GoToCategoryProductsPage(Category category)
+        {
+            var parameter = new Dictionary<string, object>
+            {
+                [nameof(CategoryProductsViewModel.SelectedCategory)] = category
+            };
+            await Shell.Current.GoToAsync(nameof(CategoryProductsPage), animate: true, parameter);
+        }
 
         private void UpdateCart(int productId, int count)
         {
