@@ -1,112 +1,160 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Controls.ProductsListControl"
-             xmlns:dto="clr-namespace:FruitVegBasketMaui.Shared.Dtos;assembly=FruitVegBasketMaui.Shared"
-             xmlns:controls="clr-namespace:Controls"
-             x:DataType="controls:ProductsListControl"
-             x:Name="this">
+<ContentView
+    x:Class="Controls.ProductsListControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Controls"
+    xmlns:dto="clr-namespace:FruitVegBasketMaui.Shared.Dtos;assembly=FruitVegBasketMaui.Shared"
+    x:Name="this"
+    x:DataType="controls:ProductsListControl">
 
     <ContentView.Resources>
         <ResourceDictionary>
-            <Style TargetType="Button" x:Key="CartBtn">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="WidthRequest" Value="35"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
+            <Style Class="CartBtn" TargetType="Button">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <!--<Setter Property="FontSize" Value="20" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="35" />-->
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
-            <Style TargetType="Button" x:Key="AddToCartBtn">
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="WidthRequest" Value="60"/>
-                <Setter Property="VerticalOptions" Value="Center"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
+
+            <Style Class="DefaultCartBtn" TargetType="Button">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="35" />
+            </Style>
+            <Style Class="SmallCartBtn" TargetType="Button">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HeightRequest" Value="25" />
+                <Setter Property="WidthRequest" Value="30" />
+            </Style>
+
+            <Style x:Key="AddToCartBtn" TargetType="Button">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
 
-    <FlexLayout BindingContext="{x:Reference this}"
-                 BindableLayout.ItemsSource="{Binding Products}"
-                 Wrap="Wrap"
-                 JustifyContent="SpaceEvenly">
+    <FlexLayout
+        BindableLayout.ItemsSource="{Binding Products}"
+        BindingContext="{x:Reference this}"
+        JustifyContent="SpaceEvenly"
+        Wrap="Wrap">
         <BindableLayout.ItemTemplate>
             <DataTemplate x:DataType="dto:ProductDto">
-                <Border Padding="10"
-                                     Margin="2"
-                                     BackgroundColor="#ff9f1e"
-                                     FlexLayout.Basis="50%">
+                <Border
+                    Margin="2"
+                    Padding="10"
+                    BackgroundColor="#ff9f1e"
+                    FlexLayout.Basis="50%">
                     <Grid RowDefinitions="175, Auto, Auto, Auto">
-                        <Image Grid.Row="0"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center"
-                                            HeightRequest="175"
-                                            />
-                        <Label Grid.Row="1"
-                                            Text="{Binding Name}"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Start"
-                                            FontAttributes="Bold"
-                                            FontSize="16"/>
-                        <Label Grid.Row="2"
-                                            Text="{Binding Unit}"
-                                            FontSize="12"/>
+                        <Image
+                            Grid.Row="0"
+                            HeightRequest="175"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="1"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            HorizontalOptions="Start"
+                            Text="{Binding Name}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Row="2"
+                            FontSize="12"
+                            Text="{Binding Unit}" />
 
-                        <Grid Grid.Row="3"
-                                           ColumnDefinitions="*, 2*">
-                            <Label Grid.Column="0"
-                                                Text="{Binding Price, StringFormat='${0}'}"
-                                                VerticalOptions="Center"/>
+                        <Grid Grid.Row="3" ColumnDefinitions="*, 2*">
+                            <Label
+                                Grid.Column="0"
+                                Text="{Binding Price, StringFormat='${0}'}"
+                                VerticalOptions="Center" />
 
-                            <Button Grid.Column="1"
-                                                 Text="Add"
-                                                 Style="{StaticResource AddToCartBtn}"
-                                                 IsVisible="False"
-                                     Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=AddToCartCommand}"
-                                             CommandParameter="{Binding Id}">
+                            <Button
+                                Grid.Column="1"
+                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=AddToCartCommand}"
+                                CommandParameter="{Binding Id}"
+                                IsVisible="False"
+                                Style="{StaticResource AddToCartBtn}"
+                                Text="Add">
                                 <Button.Triggers>
-                                    <DataTrigger TargetType="Button"
-                                                              Binding="{Binding CartQuantity}"
-                                                              Value="0">
-                                        <Setter Property="IsVisible" Value="True"/>
+                                    <DataTrigger
+                                        Binding="{Binding CartQuantity}"
+                                        TargetType="Button"
+                                        Value="0">
+                                        <Setter Property="IsVisible" Value="True" />
                                     </DataTrigger>
                                 </Button.Triggers>
                             </Button>
 
-                            <Border Grid.Column="1"
-                                                 IsVisible="True"
-                                                 StrokeShape="RoundRectangle 6"
-                                                 StrokeThickness="1"
-                                                 Stroke="{StaticResource Primary}">
+                            <Border
+                                Grid.Column="1"
+                                IsVisible="True"
+                                Stroke="{StaticResource Primary}"
+                                StrokeShape="RoundRectangle 6"
+                                StrokeThickness="1">
 
                                 <Border.Triggers>
-                                    <DataTrigger TargetType="Border"
-                                                              Binding="{Binding CartQuantity}"
-                                                              Value="0">
-                                        <Setter Property="IsVisible" Value="False"/>
+                                    <DataTrigger
+                                        Binding="{Binding CartQuantity}"
+                                        TargetType="Border"
+                                        Value="0">
+                                        <Setter Property="IsVisible" Value="False" />
                                     </DataTrigger>
                                 </Border.Triggers>
 
-                                <Grid ColumnDefinitions="Auto, *, Auto">
-                                    <Button Grid.Column="0"
-                                             Text="-"
-                                             Style="{StaticResource CartBtn}"
-                                             Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=RemoveFromCartCommand}"
-                                             CommandParameter="{Binding Id}"/>
-                                    <Label Grid.Column="1" 
-                                                    Text="{Binding CartQuantity}"
-                                                        VerticalOptions="Center"
-                                                        HorizontalOptions="Center"/>
-                                    <Button Grid.Column="2"
-                                                 Text="+"
-                                                 Style="{StaticResource CartBtn}"
-                                             Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=AddToCartCommand}"
-                                             CommandParameter="{Binding Id}"/>
-                                </Grid>
+                                <VerticalStackLayout>
+                                    <Grid ColumnDefinitions="Auto, *, Auto" IsVisible="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=IsDefault}">
+                                        <Button
+                                            Grid.Column="0"
+                                            Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=RemoveFromCartCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            StyleClass="CartBtn, DefaultCartBtn"
+                                            Text="-" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding CartQuantity}"
+                                            VerticalOptions="Center" />
+                                        <Button
+                                            Grid.Column="2"
+                                            Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=AddToCartCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            StyleClass="CartBtn, DefaultCartBtn"
+                                            Text="+" />
+                                    </Grid>
+
+                                    <Grid ColumnDefinitions="Auto, *, Auto"
+                                          IsVisible="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=IsSmall}">
+                                        <Button
+                                            Grid.Column="0"
+                                            Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=RemoveFromCartCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            StyleClass="CartBtn, SmallCartBtn"
+                                            Text="-" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center"
+                                            FontSize="13"
+                                            Text="{Binding CartQuantity}"
+                                            VerticalOptions="Center" />
+                                        <Button
+                                            Grid.Column="2"
+                                            Command="{Binding Source={x:RelativeSource AncestorType={x:Type controls:ProductsListControl}}, Path=AddToCartCommand}"
+                                            CommandParameter="{Binding Id}"
+                                            StyleClass="CartBtn, SmallCartBtn"
+                                            Text="+" />
+                                    </Grid>
+                                </VerticalStackLayout>
                             </Border>
                         </Grid>
                     </Grid>

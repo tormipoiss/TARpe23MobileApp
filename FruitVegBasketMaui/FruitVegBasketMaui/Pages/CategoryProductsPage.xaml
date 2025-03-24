@@ -1,52 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:FruitVegBasket.ViewModels"
-             xmlns:models="clr-namespace:Models"
-             xmlns:controls="clr-namespace:Controls"
-             xmlns:dto="clr-namespace:FruitVegBasketMaui.Shared.Dtos;assembly=FruitVegBasketMaui.Shared"
-             x:Class="Pages.CategoryProductsPage"
-             x:DataType="vm:CategoryProductsViewModel"
-             Title="{Binding PageTitle}">
+<ContentPage
+    x:Class="Pages.CategoryProductsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Controls"
+    xmlns:dto="clr-namespace:FruitVegBasketMaui.Shared.Dtos;assembly=FruitVegBasketMaui.Shared"
+    xmlns:models="clr-namespace:Models"
+    xmlns:vm="clr-namespace:FruitVegBasket.ViewModels"
+    Title="{Binding PageTitle}"
+    x:DataType="vm:CategoryProductsViewModel">
 
-
-    <Grid ColumnDefinitions="80, *">
-        <CollectionView Grid.Column="0"
-                        ItemsSource="{Binding Categories}"
-                        BackgroundColor="{StaticResource Primary}">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical"
-                                   ItemSpacing="15" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Category">
-                    <VerticalStackLayout HorizontalOptions="Center"
-                                         VerticalOptions="Center"
-                                         WidthRequest="80"
-                                         Padding="0, 10, 0, 0">
-                        <Border StrokeShape="RoundRectangle 35"
-                                StrokeThickness="0"
+    <Grid>
+        <Grid ColumnDefinitions="80, *">
+            <CollectionView
+                Grid.Column="0"
+                BackgroundColor="{StaticResource Primary}"
+                ItemsSource="{Binding Categories}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="15" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Category">
+                        <VerticalStackLayout
+                            Padding="0,10,0,0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="80">
+                            <Border
                                 HeightRequest="70"
-                                WidthRequest="70"
-                                HorizontalOptions="Center">
-                            <Image Source="{Binding Image}"
-                                   Aspect="AspectFill"
-                                   HeightRequest="70"
-                                   WidthRequest="70" />
-                        </Border>
-                        <Label Text="{Binding Name}"
-                               TextColor="White"
-                               FontSize="12"
-                               LineBreakMode="WordWrap"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <ScrollView Grid.Column="1">
-            <Label Text="Products"/>
-        </ScrollView>
+                                HorizontalOptions="Center"
+                                StrokeShape="RoundRectangle 35"
+                                StrokeThickness="0"
+                                WidthRequest="70">
+                                <Image
+                                    Aspect="AspectFill"
+                                    HeightRequest="70"
+                                    Source="{Binding Image}"
+                                    WidthRequest="70" />
+                            </Border>
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="12"
+                                HorizontalTextAlignment="Center"
+                                LineBreakMode="WordWrap"
+                                Text="{Binding Name}"
+                                TextColor="White" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <ScrollView Grid.Column="1">
+                <controls:ProductsListControl
+                    AddRemoveCartClicked="ProductsListControl_AddRemoveCartClicked"
+                    IsSmall="True"
+                    Products="{Binding Products}" />
+            </ScrollView>
+        </Grid>
+        <controls:CartControl Count="{Binding CartCount}" />
+        <ActivityIndicator
+            HeightRequest="30"
+            HorizontalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            VerticalOptions="Center"
+            WidthRequest="30"
+            Color="{StaticResource Mid}" />
     </Grid>
 
 </ContentPage>

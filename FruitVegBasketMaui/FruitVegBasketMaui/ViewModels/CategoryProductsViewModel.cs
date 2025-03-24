@@ -36,8 +36,13 @@ namespace FruitVegBasket.ViewModels
 
         public string PageTitle => $"{SelectedCategory?.Name ?? "Category"} Products";
 
-        public ObservableCollection<Category> Categories { get; set; } = new();
-        public ObservableCollection<ProductDto> Products { get; set; } = new();
+        [ObservableProperty]
+        public IEnumerable<Category> _categories = Enumerable.Empty<Category>();
+        //public ObservableCollection<Category> Categories { get; set; } = new();
+
+        [ObservableProperty]
+        public IEnumerable<ProductDto> _products = Enumerable.Empty<ProductDto>();
+        //public ObservableCollection<ProductDto> Products { get; set; } = new();
 
         [ObservableProperty]
         private bool _isBusy = true;
@@ -48,19 +53,25 @@ namespace FruitVegBasket.ViewModels
         public async Task InitializeAsync()
         {
             IsBusy = true;
+            await Task.Delay(100);
             try
             {
-                Categories.Clear();
-                foreach (var category in await _categoryService.GetSubOrSiblingCategories(SelectedCategory.Id))
-                {
-                    Categories.Add(category);
-                }
+                //Categories.Clear();
+                //foreach (var category in await _categoryService.GetSubOrSiblingCategories(SelectedCategory.Id))
+                //{
+                //    Categories.Add(category);
+                //}
 
-                Products.Clear();
-                foreach (var product in await _productsService.GetCategoryProductsAsync(SelectedCategory.Id))
-                {
-                    Products.Add(product);
-                }
+                //Products.Clear();
+                //foreach (var product in await _productsService.GetCategoryProductsAsync(SelectedCategory.Id))
+                //{
+                //    Products.Add(product);
+                //}
+                var categoriesTask = _categoryService.GetSubOrSiblingCategories(SelectedCategory.Id);
+
+                var products = await _productsService.GetCategoryProductsAsync(SelectedCategory.Id);
+                Categories = await categoriesTask;
+                Products = products;
             }
             finally
             {
